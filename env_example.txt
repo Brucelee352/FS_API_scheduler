@@ -1,18 +1,29 @@
+# An example .env for use with this project, replace with your own criteria. 
+
+# Please ensure that the database path aligns with what's being used in scripts
+# and the dbt project itself. 
+
 # MinIO/S3 Configuration
-MINIO_ENDPOINT=
-MINIO_ACCESS_KEY=
-MINIO_SECRET_KEY=
-MINIO_BUCKET_NAME=
+MINIO_ENDPOINT=your_endpoint_here
+MINIO_ACCESS_KEY=your_access_key_here
+MINIO_SECRET_KEY=your_secret_key_here
+MINIO_BUCKET_NAME=your_bucket_name
 MINIO_USE_SSL=False
+MINIO_URL_STYLE=path
 
 # Database Configuration
 DUCKDB_PATH=
 
 # Data Generation Settings
-NUM_ROWS=8000
+DEFAULT_NUM_ROWS=8000
 START_DATETIME=2022-01-01 10:30
 END_DATETIME=2024-12-31 23:59
+VALID_STATUSES=pending,completed,failed
 
 # Logging Configuration
 LOG_LEVEL=INFO
 LOG_FILE=logs/generate_fake_data.log
+
+# Random Seed Settings
+FAKER_SEED=42
+RANDOM_SEED=42

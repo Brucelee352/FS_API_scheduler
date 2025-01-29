@@ -2,15 +2,14 @@ version: 2
 
 sources:
   - name: raw_data
+    database: dbt_pipeline_demo
     schema: main
     tables:
       - name: user_activity
-        description: "Raw user activity data from DuckDB"
-        loaded_at_field: "account_updated"
 
 models:
   - name: dim_user
-    description: "Dimension table for user data."
+    description: "Dimension table for user data"
     columns:
       - name: user_id
         description: "Unique identifier for each user."
@@ -25,28 +24,39 @@ models:
         description: "User's email address."
       - name: is_active
         description: "Whether the user is active."
-
+  
   - name: stg_product_schema
     description: "Staging table for product data"
-    schema: main
-    
-  - name: product_schema
-    description: "Production product data"
-    schema: main
-    depends_on:
-      - ref('stg_product_schema')
     columns:
       - name: user_id
         description: "Unique identifier for each user."
         tests:
-          - relationships:
-              to: ref('dim_user')
-              field: user_id
+          - unique
+          - not_null
+
+  - name: product_schema
+    description: "Production product data"
+    schema: main
+    columns:
       - name: session_id
-        description: "Primary key for the model"
+        description: "Unique identifier for each session"
         tests:
           - unique
           - not_null
+      - name: user_id
+        description: "Foreign key to the user dimension table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_user')
+              field: user_id
+      - name: price
+        description: "Price of the product"
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 5000
 
     indexes:
       - columns: ['user_id']

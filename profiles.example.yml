@@ -1,5 +1,29 @@
-default:
-  outputs:
-    dev:
-      type: duckdb
-  target: dev
+# This is an example of a profiles.yml file for dbt.
+# It is used to configure this dbt project, and can be changed
+# to suit the needs of your use of this project. 
+
+# Please ensure that your other database components are configured first,
+# and that the path to your database is correct. 
+
+# Consult the documentation on this project and/or dbt's docs for more information. 
+
+# Uncomment the following lines below to use this profile, and then 
+# place it in the .dbt folder in your home directory. Usually located at:
+# C:\Users\yourname\.dbt\profiles.yml on Windows. 
+
+# dbt_pipeline_demo:
+#  outputs:
+#    dev:
+#      type: duckdb
+#      path: "path/to/your/duckdb/database.duckdb"
+#      extensions:
+#        - parquet
+#        - s3
+#        - json
+#      threads: 1
+
+#    prod:
+#      type: duckdb
+#      path: prod.duckdb
+#      threads: 4
+#  target: dev

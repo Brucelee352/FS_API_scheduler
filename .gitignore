@@ -182,3 +182,7 @@ cython_debug/
 logs/
 *.log
 *.duckdb
+
+# dbt
+dbt_packages/
+pdp_config.env
